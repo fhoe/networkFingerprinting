@@ -56,21 +56,21 @@ static const char rcsid[] =
 #define WARTS_FPRINTING_START           3
 #define WARTS_FPRINTING_STOP_R          4
 #define WARTS_FPRINTING_STOP_D          5
-#define WARTS_FPRINTING_IS_ICMPDL       7
-#define WARTS_FPRINTING_IS_IPDF         8
-#define WARTS_FPRINTING_IS_TOS          9
-#define WARTS_FPRINTING_PING           11
-#define WARTS_FPRINTING_ITTL           12
-#define WARTS_FPRINTING_SPORT          13
-#define WARTS_FPRINTING_DPORT          14
-#define WARTS_FPRINTING_REPC           15
-#define WARTS_FPRINTING_PBMODE         17
-#define WARTS_FPRINTING_NFIND          18
-#define WARTS_FPRINTING_IS_MPLS        19
-#define WARTS_FPRINTING_ISMULTI        20
-#define WARTS_FPRINTING_NPROBE         21
-#define WARTS_FPRINTING_TABLE_BAD      22
-#define WARTS_FPRINTING_ADF            23
+#define WARTS_FPRINTING_IS_ICMPDL       6
+#define WARTS_FPRINTING_IS_IPDF         7
+#define WARTS_FPRINTING_IS_TOS          8
+#define WARTS_FPRINTING_PING            9
+#define WARTS_FPRINTING_ITTL            10
+#define WARTS_FPRINTING_SPORT           11
+#define WARTS_FPRINTING_DPORT           12
+#define WARTS_FPRINTING_REPC            13
+#define WARTS_FPRINTING_PBMODE          14
+#define WARTS_FPRINTING_NFIND           15
+#define WARTS_FPRINTING_IS_MPLS         16
+#define WARTS_FPRINTING_ISMULTI         17
+#define WARTS_FPRINTING_NPROBE          18
+#define WARTS_FPRINTING_TABLE_BAD       19
+#define WARTS_FPRINTING_ADF             20
 
 static const warts_var_t fprinting_vars[] = {
     { WARTS_FPRINTING_ADDR_SRC,        -1, -1},
@@ -88,7 +88,7 @@ static const warts_var_t fprinting_vars[] = {
     { WARTS_FPRINTING_REPC,            4, -1},
 	{ WARTS_FPRINTING_PBMODE,          1, -1},
 	{ WARTS_FPRINTING_NFIND,           1, -1},
-    { WARTS_FPRINTING_IS_MPLS,  1, -1},
+    { WARTS_FPRINTING_IS_MPLS,         1, -1},
     { WARTS_FPRINTING_ISMULTI,         1, -1},
     { WARTS_FPRINTING_NPROBE,          1, -1},
     { WARTS_FPRINTING_TABLE_BAD,       -1, -1},
@@ -503,9 +503,9 @@ static int warts_fprinting_params_read(scamper_fprinting_t *fprinting, warts_sta
         {&fprinting->sport, (wpr_t)extract_uint16,          NULL},
         {&fprinting->dport, (wpr_t)extract_uint16,          NULL},
         {&fprinting->replyc, (wpr_t)extract_uint32,          NULL},
-		{&fprinting->ismpls, (wpr_t)extract_byte,   NULL},
 		{&fprinting->pbmode, (wpr_t)extract_byte,         NULL},
 		{&fprinting->nfind, (wpr_t)extract_byte,         NULL},
+		{&fprinting->ismpls, (wpr_t)extract_byte,   NULL},
         {&fprinting->ismulti, (wpr_t)extract_byte,         NULL},
         {&fprinting->nprobe, (wpr_t)extract_byte,         NULL},
         {fprinting->ip_replies, (wpr_t)extract_fprinting_table, table},
@@ -545,9 +545,9 @@ static int warts_fprinting_params_write(const scamper_fprinting_t *fprinting,
         {&fprinting->sport, (wpw_t)insert_uint16,          NULL},
         {&fprinting->dport, (wpw_t)insert_uint16,          NULL},
         {&fprinting->replyc, (wpw_t)insert_uint32,          NULL},
-		{&fprinting->ismpls, (wpw_t)insert_byte,    NULL},
 		{&fprinting->pbmode, (wpw_t)insert_byte,          NULL},
 		{&fprinting->nfind, (wpw_t)insert_byte,          NULL},
+		{&fprinting->ismpls, (wpw_t)insert_byte,    NULL},
         {&fprinting->ismulti, (wpw_t)insert_byte,         NULL},
         {&fprinting->nprobe, (wpw_t)insert_byte,         NULL},
         {fprinting->ip_replies, (wpw_t)insert_fprinting_table, table},
