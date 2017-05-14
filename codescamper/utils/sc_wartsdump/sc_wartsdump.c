@@ -876,14 +876,13 @@ static void dump_fprinting_reply(const scamper_fprinting_t *fprinting,
   printf("[[IP=%s] | ",
 	 scamper_addr_tostr(reply->addr, buf, sizeof(buf)));
 
-	if(fprinting->isicmpdlen)
+	if(fprinting->add_icmp_len)
   printf("[size=%d] | ", reply->reply_size);
 	if(SCAMPER_FPRINTING_REPLY_IS_ICMP_TTL_EXP(reply)                                 ||
 		SCAMPER_FPRINTING_REPLY_IS_TCP(reply)                                          ||
-		(fprinting->isechottl && SCAMPER_FPRINTING_REPLY_IS_ICMP_ECHO_REPLY(reply))    ||
-		(fprinting->isicmptimettl && SCAMPER_FPRINTING_REPLY_IS_ICMP_TSREPLY(reply))   ||
-      (fprinting->isicmpfragttl && SCAMPER_FPRINTING_REPLY_IS_ICMP_TIMEF_EXP(reply)) ||
-		(fprinting->isudpttl && SCAMPER_FPRINTING_REPLY_IS_ICMP_UNREACH(reply))) {
+		(SCAMPER_FPRINTING_REPLY_IS_ICMP_ECHO_REPLY(reply))    ||
+		(SCAMPER_FPRINTING_REPLY_IS_ICMP_TSREPLY(reply))   ||
+		(SCAMPER_FPRINTING_REPLY_IS_ICMP_UNREACH(reply))) {
   		printf("[ttl=%d] | ", reply->reply_ttl);
   	   printf("[ittl=%d] | ", reply->os_ttl);
 	}
@@ -1000,15 +999,10 @@ static void dump_fprinting(scamper_fprinting_t *fprinting)
 		fprinting->nfind, fprinting->nprobe, fprinting->sport, fprinting->ittl);
 	printf("get icmp time-exp ittl\n");
 	printf("get tcp/ip ittl\n");
-   if(fprinting->isechottl)
-		printf("get icmp echo ittl\n");
-	if(fprinting->isicmptimettl)
-		printf("get icmp timestamp ittl\n");
-	if(fprinting->isudpttl)
-		printf("get icmp port-unreach ittl\n");
-   if(fprinting->isicmpfragttl)
-		printf("get icmp time-fragment exceeded ittl\n");
-   if(fprinting->isicmpdlen)
+    printf("get icmp echo ittl\n");
+    printf("get icmp timestamp ittl\n");
+    printf("get icmp port-unreach ittl\n");
+   if(fprinting->add_icmp_len)
 		printf("get icmp reply size\n");
    if(fprinting->isipdf)
 		printf("get tcp/ip don't fragment flag\n");
